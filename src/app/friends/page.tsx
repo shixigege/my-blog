@@ -33,12 +33,12 @@ export default async function FriendsPage() {
           <p className="text-xs mt-2 font-mono tracking-wider">期待与你建立连接</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
           {friends.map((f) => (
             <ScrollReveal key={f.name}>
               <a href={f.url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 border border-border hover:bg-accent-glow transition-colors group">
-                <div className="w-12 h-12 rounded-full bg-accent-glow flex items-center justify-center text-accent font-display text-lg flex-shrink-0 border border-accent/20 overflow-hidden">
+                className="flex items-center gap-5 p-6 border border-border hover:bg-accent-glow transition-colors group">
+                <div className="w-16 h-16 rounded-full bg-accent-glow flex items-center justify-center text-accent font-display text-2xl flex-shrink-0 border border-accent/20 overflow-hidden">
                   {f.avatar ? (
                     <img src={f.avatar} alt={f.name} className="w-full h-full object-cover" />
                   ) : (
@@ -46,11 +46,11 @@ export default async function FriendsPage() {
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="text-sm font-semibold text-text group-hover:text-accent transition-colors">
+                  <h3 className="text-lg font-semibold text-text group-hover:text-accent transition-colors">
                     {f.name}
                   </h3>
-                  {f.desc && <p className="text-xs text-text-secondary mt-0.5 truncate">{f.desc}</p>}
-                  <p className="text-[.6rem] text-text-secondary/60 font-mono mt-1 truncate">{f.url}</p>
+                  {f.desc && <p className="text-sm text-text-secondary mt-1 leading-relaxed">{f.desc}</p>}
+                  <p className="text-xs text-text-secondary/60 font-mono mt-1.5 truncate">{f.url}</p>
                 </div>
               </a>
             </ScrollReveal>
