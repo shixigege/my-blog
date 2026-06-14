@@ -3,13 +3,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getAllTags, getArchive, type Post } from "@/lib/posts";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export function Sidebar() {
   const [tags, setTags] = useState<[string, number][]>([]);
   const [archive, setArchive] = useState<[string, number][]>([]);
   const [today, setToday] = useState({ y: "", m: "", d: "", w: "" });
 
   useEffect(() => {
-    fetch("/blogs/index.json").then(r => r.json()).then((posts: Post[]) => {
+    fetch(`${BASE}/blogs/index.json`).then(r => r.json()).then((posts: Post[]) => {
       setTags([...getAllTags(posts).entries()].slice(0, 10));
       const arch = getArchive(posts);
       setArchive([...arch.entries()].slice(0, 6).map(([k, v]) => [k, v.length]));

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { getPost, type Post, readingTime, wordCount } from "@/lib/posts";
 import { renderMarkdown } from "@/lib/markdown-renderer";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function BlogDetailClient() {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<Post | null>(null);
@@ -20,7 +22,7 @@ export default function BlogDetailClient() {
         const p = await getPost(slug);
         setPost(p as Post);
         setHtml(await renderMarkdown(p.content));
-        const r = await fetch("/blogs/index.json");
+        const r = await fetch(`${BASE}/blogs/index.json`);
         if (r.ok) { const all: Post[] = await r.json(); const i = all.findIndex(a => a.slug === slug); setNav({ prev: i > 0 ? all[i - 1] : null, next: i < all.length - 1 ? all[i + 1] : null }); }
       } catch (e: any) { setErr(e.message); }
       finally { setLoading(false); }

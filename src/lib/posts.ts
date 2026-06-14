@@ -4,10 +4,12 @@ export interface Post {
   content?: string;
 }
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export async function getPost(slug: string) {
   const [cfg, md] = await Promise.all([
-    fetch(`/blogs/${encodeURIComponent(slug)}/config.json`).then(r => r.ok ? r.json() : {}),
-    fetch(`/blogs/${encodeURIComponent(slug)}/index.md`).then(r => r.ok ? r.text() : null),
+    fetch(`${BASE}/blogs/${encodeURIComponent(slug)}/config.json`).then(r => r.ok ? r.json() : {}),
+    fetch(`${BASE}/blogs/${encodeURIComponent(slug)}/index.md`).then(r => r.ok ? r.text() : null),
   ]);
   if (!md) throw new Error("Not found");
   return { ...cfg, slug, content: md };

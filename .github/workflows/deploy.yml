@@ -28,6 +28,8 @@ jobs:
           cache: pnpm
       - run: pnpm install
       - run: pnpm build
+        env:
+          SITE_URL: https://shixigege.github.io/my-blog
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

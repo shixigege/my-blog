@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { DM_Serif_Display, Noto_Serif_SC, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
@@ -53,9 +54,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <header className="newspaper-masthead border-t-0 pt-4 pb-4">
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
                   <div className="flex-shrink-0 flex flex-col items-center md:items-center gap-2">
-                    <a href="/" className="block hover:opacity-80 transition-opacity">
+                    <Link href="/" className="block hover:opacity-80 transition-opacity">
                       <AvatarDisplay author={siteConfig.author} fallback={siteConfig.avatar} />
-                    </a>
+                    </Link>
                     <p className="text-[.9rem] text-text-secondary font-mono tracking-widest uppercase">主编</p>
                     <div className="flex items-center gap-3 mt-1">
                       <a href={siteConfig.github} target="_blank" rel="noopener noreferrer"
