@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>闲笔日报</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  background:#E8D5B7; color:#2C1810;
+  font-family:"Noto Serif SC","Playfair Display",Georgia,serif;
+  font-size:15px; line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;transition:color .2s}
+a:hover{color:#8B3A3A}
+
+/* ——— paper sheet ——— */
+.paper{
+  max-width:1200px;margin:24px auto;
+  background:#F2E3C6;
+  border:1px solid #C8B89A;
+  padding:36px 48px 48px;
+  box-shadow:8px 8px 24px rgba(80,60,40,.12);
+}
+
+/* ——— masthead ——— */
+.masthead{
+  text-align:center;padding:20px 0 16px;
+  border-bottom:3px double #8B3A3A;
+  margin-bottom:0;
+}
+.masthead h1{
+  font-family:"Playfair Display","Noto Serif SC",serif;
+  font-size:2.8rem;font-weight:800;
+  letter-spacing:.12em;color:#2C1810;text-transform:uppercase;
+}
+.masthead .rule{width:80px;height:3px;margin:8px auto;background:#8B3A3A}
+.masthead .sub{font-size:.7rem;letter-spacing:.18em;color:#8B3A3A;font-variant:small-caps;margin-top:4px}
+.masthead .date{font-size:.62rem;color:#6B5B4E;margin-top:4px;font-variant:small-caps;letter-spacing:.1em}
+
+.issue-line{
+  display:flex;justify-content:space-between;
+  font-size:.65rem;color:#6B5B4E;
+  font-variant:small-caps;letter-spacing:.08em;
+  padding:6px 0 10px;
+  border-bottom:1px solid #C8B89A;
+}
+.issue-line .vol{color:#8B3A3A;font-weight:600}
+
+.nav{
+  text-align:center;padding:8px 0;
+  border-bottom:1px solid #C8B89A;
+  margin-bottom:0;font-size:.7rem;
+}
+.nav a{color:#5A4A3A;margin:0 8px;font-variant:small-caps;letter-spacing:.08em}
+.nav a:hover{color:#8B3A3A}
+.nav span{color:#C8B89A;font-size:.5rem}
+
+/* ——— front page grid ——— */
+.front-page{display:grid;grid-template-columns:1fr 220px;gap:28px;margin-top:20px}
+.main-col{min-width:0}
+.side-col{min-width:0;border-left:1px solid #C8B89A;padding-left:22px}
+
+/* ——— headline ——— */
+.headline{padding-bottom:16px;margin-bottom:20px;border-bottom:1px solid #C8B89A}
+.headline h2{
+  font-family:"Playfair Display","Noto Serif SC",serif;
+  font-size:1.75rem;font-weight:800;line-height:1.15;margin-bottom:8px;letter-spacing:.02em;
+}
+.headline h2 a{color:#2C1810}
+.headline h2 a:hover{color:#8B3A3A}
+.headline .byline{font-size:.62rem;color:#6B5B4E;font-variant:small-caps;letter-spacing:.08em;margin-bottom:12px}
+.headline .byline .tag{color:#5A4A3A;font-weight:600}
+.headline-body{
+  columns:2;column-gap:28px;
+  font-size:.88rem;text-align:justify;line-height:1.9;
+}
+.headline-body p{margin-bottom:10px}
+
+/* ——— modular story card ——— */
+.story-grid-3{
+  display:grid;grid-template-columns:1.2fr 1fr 1fr;
+  gap:20px;margin-bottom:20px;
+}
+.story-card{
+  border:1px solid #C8B89A;padding:20px;
+}
+.story-card h3{
+  font-family:"Playfair Display","Noto Serif SC",serif;
+  font-size:1.05rem;font-weight:800;line-height:1.3;margin-bottom:8px;letter-spacing:.01em;
+}
+.story-card h3 a{color:#2C1810}
+.story-card h3 a:hover{color:#8B3A3A}
+.story-card .meta{font-size:.6rem;color:#6B5B4E;font-variant:small-caps;letter-spacing:.06em;margin-bottom:6px}
+.story-card .meta .tag{color:#5A4A3A;font-weight:600}
+.story-card p{font-size:.8rem;line-height:1.7;text-align:justify;color:#3C2E22}
+
+/* ——— briefs + supplement ——— */
+.briefs-grid{
+  display:grid;grid-template-columns:1.8fr 1fr;
+  gap:24px;margin-bottom:20px;
+}
+.section-title{
+  font-size:.62rem;color:#5A4A3A;font-weight:600;
+  font-variant:small-caps;letter-spacing:.14em;
+  border-bottom:1px solid #C8B89A;
+  padding-bottom:5px;margin-bottom:10px;
+}
+.brief-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #C8B89A}
+.brief-item:last-child{border-bottom:none}
+.brief-arrow{color:#C8B89A;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.brief-item p{font-size:.82rem;color:#2C1810;line-height:1.4}
+.brief-item .date{font-size:.6rem;color:#6B5B4E;font-variant:small-caps;letter-spacing:.06em;margin-top:2px}
+
+.supplement-card{
+  border:1px solid #C8B89A;padding:20px;
+}
+.supplement-card .meta{font-size:.6rem;color:#5A4A3A;font-weight:600;font-variant:small-caps;letter-spacing:.06em;margin-bottom:6px}
+.supplement-card h4{
+  font-family:"Playfair Display","Noto Serif SC",serif;
+  font-size:.95rem;font-weight:700;line-height:1.3;margin-bottom:6px;color:#2C1810;
+}
+.supplement-card p{font-size:.8rem;color:#3C2E22;line-height:1.6;text-align:justify}
+
+/* ——— column ——— */
+.column-card{
+  border:1px solid #C8B89A;padding:24px;margin-bottom:0;
+}
+.column-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.column-bar{width:3px;height:20px;background:#8B3A3A}
+.column-label{font-size:.62rem;color:#8B3A3A;font-variant:small-caps;letter-spacing:.12em;font-weight:600}
+.column-card h3{
+  font-family:"Playfair Display","Noto Serif SC",serif;
+  font-size:1.1rem;font-weight:800;line-height:1.3;margin-bottom:8px;color:#2C1810;
+}
+.column-card p{font-size:.82rem;color:#3C2E22;line-height:1.7;text-align:justify}
+.column-card .read-more{font-size:.72rem;color:#8B3A3A;margin-top:10px;cursor:pointer;display:inline-block}
+
+/* ——— sidebar ——— */
+.side-section{margin-bottom:24px;font-size:.72rem}
+.side-title{
+  font-size:.62rem;color:#5A4A3A;font-weight:600;
+  font-variant:small-caps;letter-spacing:.14em;
+  border-bottom:1px solid #C8B89A;
+  padding-bottom:5px;margin-bottom:10px;
+}
+.side-section p{font-size:.75rem;color:#4A3C30;line-height:1.6}
+.side-links{list-style:none}
+.side-links li{font-size:.72rem;padding:5px 0;border-bottom:1px solid #C8B89A}
+.side-links li:last-child{border-bottom:none}
+.side-links a{color:#6B5B4E;display:flex;justify-content:space-between}
+.side-links a:hover{color:#8B3A3A}
+.side-links .count{color:#C8B89A;font-size:.65rem}
+
+/* ——— divider ——— */
+.section-divider{text-align:center;font-size:.6rem;color:#C8B89A;letter-spacing:.5em;padding:10px 0;user-select:none}
+
+/* ——— footer ——— */
+.footer{border-top:1px solid #C8B89A;margin-top:24px;padding-top:14px;text-align:center;font-size:.65rem;color:#6B5B4E;font-variant:small-caps;letter-spacing:.08em}
+
+/* ——— responsive ——— */
+@media(max-width:768px){
+  .front-page{grid-template-columns:1fr}
+  .side-col{border-left:none;border-top:1px solid #C8B89A;padding-left:0;padding-top:16px}
+  .story-grid-3{grid-template-columns:1fr}
+  .headline-body{columns:1}
+  .briefs-grid{grid-template-columns:1fr}
+  .paper{padding:20px 16px}
+  .masthead h1{font-size:2rem}
+  .story-card,.supplement-card{border-left:none;border-right:none}
+}
+</style>
+</head>
+<body>
+
+<div class="paper">
+
+  <!-- ISSUE LINE -->
+  <div class="issue-line">
+    <span class="vol">Vol. I · No. 1</span>
+    <span>戊申年 · 仲夏 · 五月初三</span>
+    <span>公元 2026 年 6 月 13 日 · 星期六</span>
+    <span>售价：免费</span>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead" style="border-top:3px double #8B3A3A;padding-top:16px;padding-bottom:16px">
+    <div style="display:flex;align-items:flex-start;gap:24px">
+      <!-- Left: Avatar -->
+      <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px">
+        <div style="width:80px;height:80px;border-radius:50%;border:2px solid rgba(139,58,58,0.3);display:flex;align-items:center;justify-content:center;color:#8B3A3A;font-family:'Playfair Display',serif;font-size:2rem;background:rgba(139,58,58,0.1);box-shadow:2px 2px 0 rgba(139,58,58,0.15)">A</div>
+        <p style="font-size:.5rem;color:#6B5B4E;font-variant:small-caps;letter-spacing:.2em">主编</p>
+      </div>
+      <!-- Right: Title -->
+      <div style="flex:1;text-align:center">
+        <h1 style="font-family:'Playfair Display','Noto Serif SC',serif;font-size:2.8rem;font-weight:800;letter-spacing:.12em;color:#2C1810;text-transform:uppercase;margin:0">闲 笔 日 报</h1>
+        <div style="width:80px;height:3px;margin:8px auto;background:#8B3A3A"></div>
+        <p style="font-size:.7rem;letter-spacing:.18em;color:#8B3A3A;font-variant:small-caps;margin-top:4px">慢下来，写点什么</p>
+        <p style="font-size:.6rem;color:#6B5B4E;margin-top:4px;font-variant:small-caps;letter-spacing:.1em">The Rigor of Language · 独立写作 · 不设评论</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#">首页</a><span>·</span>
+    <a href="#">博客</a><span>·</span>
+    <a href="#">归档</a><span>·</span>
+    <a href="#">标签</a><span>·</span>
+    <a href="#">友链</a><span>·</span>
+    <a href="#">关于</a><span>·</span>
+    <a href="#">写作</a>
+  </nav>
+
+  <!-- ============== FRONT PAGE ============== -->
+  <div class="front-page">
+
+    <!-- ===== MAIN COLUMN ===== -->
+    <main class="main-col">
+
+      <!-- HEADLINE -->
+      <article class="headline">
+        <p class="byline">
+          <span class="tag">[文艺随笔]</span>
+          <span style="color:#C8B89A;margin:0 6px">|</span>
+          丙午年五月十三
+          <span style="color:#C8B89A;margin:0 6px">|</span>
+          1,240 字
+          <span style="color:#C8B89A;margin:0 6px">|</span>
+          阅读 6 分钟
+        </p>
+        <h2><a href="#">旧书摊的午后</a></h2>
+        <div class="headline-body">
+          <p>六月的第三个星期日，阳光穿过梧桐树叶的缝隙，在旧书摊的木板上投下斑驳的光影。蹲下来翻一本泛黄的诗集，书页间夹着一片干枯枫叶——大约是上世纪某个秋天留下的书签。</p>
+          <p>摊主是个戴老花镜的先生，正用放大镜读一份过了期的晚报，头也不抬地说了句"那本五块"。语气平淡，像在陈述一个早已被时间消化掉的事实。旧书的油墨味混着夏天特有的尘土气息，让人想起祖父书房里的午后。那时候时间走得很慢，慢到你可以用一个下午读完一本薄薄的诗集，再用剩下的黄昏反复咀嚼其中某一行。</p>
+          <p>回家后把诗集放在桌上，枫叶从书页间滑落，背面有一行褪色的钢笔字："一九七三年秋，购于南京路"。那个写字的人是谁？这些问题不会再有答案，但它们让一本五块钱的旧书突然有了重量。</p>
+        </div>
+      </article>
+
+      <div class="section-divider">◆ ◆ ◆</div>
+
+      <!-- 3-COLUMN STORIES (asymmetric modular cards) -->
+      <div class="story-grid-3">
+        <div class="story-card">
+          <p class="meta"><span class="tag">[技术笔记]</span></p>
+          <h3><a href="#">排版：活字印刷留给数字时代的遗产</a></h3>
+          <p>谷登堡未必能料到，他在十五世纪摆弄的那些铅字，会在五百年后影响着数十亿人的阅读。字距、行高、栏宽——在铅字时代是物理约束，在数字时代却成了设计选择。</p>
+        </div>
+        <div class="story-card">
+          <p class="meta"><span class="tag">[阅读笔记]</span></p>
+          <h3><a href="#">原研哉的"白"：空空荡荡，包罗万象</a></h3>
+          <p>白不是一种颜色，而是一种容纳性。一张白纸不是空的。它包含着一切尚未落笔的想法。留白不是浪费——它是给思想的栖居。</p>
+        </div>
+        <div class="story-card">
+          <p class="meta"><span class="tag">[随感]</span></p>
+          <h3><a href="#">雨夜翻检旧信</a></h3>
+          <p>昨夜下雨，翻出一只旧铁盒，里面是高中时代和几个笔友的通信。纸已经泛黄。那时候没有微信和邮件，写一封信要花半个晚自习。等信的那几天，每天下午都去传达室看小黑板上有没有自己的名字。</p>
+        </div>
+      </div>
+
+      <div class="section-divider">◆ ◆ ◆</div>
+
+      <!-- BRIEFS + SUPPLEMENT (asymmetric grid) -->
+      <div class="briefs-grid">
+        <div>
+          <h3 class="section-title">简讯</h3>
+          <div class="brief-item"><span class="brief-arrow">▸</span><div><p>Stack Overflow 2025 开发者调查发布</p><p class="date">六月十三日</p></div></div>
+          <div class="brief-item"><span class="brief-arrow">▸</span><div><p>Vim 用户突破 300 万，Neovim 增速最快</p><p class="date">六月十二日</p></div></div>
+          <div class="brief-item"><span class="brief-arrow">▸</span><div><p>Python 3.14 已进入 Beta 阶段</p><p class="date">六月十一日</p></div></div>
+          <div class="brief-item"><span class="brief-arrow">▸</span><div><p>RFC 9669 正式成为 HTTP/4 标准基础</p><p class="date">六月十日</p></div></div>
+        </div>
+        <div>
+          <h3 class="section-title">副刊</h3>
+          <div class="supplement-card">
+            <p class="meta">[读书]</p>
+            <h4>从《观看之道》到"被观看"的日常</h4>
+            <p>约翰·伯格在《观看之道》中开篇写道："观看先于言语。"儿童先学会看，然后才能说话。但讽刺的是，成年之后我们每天都在"看"，却很少真的"观看"。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider">◆ ◆ ◆</div>
+
+      <!-- COLUMN (modular card) -->
+      <div class="column-card">
+        <div class="column-header">
+          <div class="column-bar"></div>
+          <span class="column-label">专栏 · Allen</span>
+        </div>
+        <h3>纸质书不会消失</h3>
+        <p>电子书市场份额逐年上升，但纸质书的销量在经历了十年的下滑之后开始趋于稳定。这说明了什么？说明了人们终于明白——纸质书和电子书不是替代关系，而是两种完全不同的体验。电子书是高效的工具，纸质书是安静的陪伴。你永远不会因为 Kindle 里有三千本书而感到满足，但你会因为书架上那一排读过的书而心安。</p>
+        <span class="read-more">阅读全文 →</span>
+      </div>
+
+    </main>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="side-col">
+      <section class="side-section">
+        <h3 class="side-title">栏目</h3>
+        <ul class="side-links">
+          <li><a href="#">文艺随笔 <span class="count">3</span></a></li>
+          <li><a href="#">技术笔记 <span class="count">2</span></a></li>
+          <li><a href="#">阅读笔记 <span class="count">1</span></a></li>
+          <li><a href="#">随感 <span class="count">2</span></a></li>
+          <li><a href="#">读书 <span class="count">1</span></a></li>
+        </ul>
+      </section>
+      <section class="side-section">
+        <h3 class="side-title">归档</h3>
+        <ul class="side-links">
+          <li><a href="#">2026 年 6 月 <span class="count">4</span></a></li>
+          <li><a href="#">2026 年 5 月 <span class="count">2</span></a></li>
+        </ul>
+      </section>
+      <section class="side-section">
+        <h3 class="side-title">友链</h3>
+        <ul class="side-links">
+          <li><a href="#">似水流年</a></li>
+          <li><a href="#">一个人的书房</a></li>
+          <li><a href="#">旧报亭</a></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    &copy; 2026 闲笔日报 &mdash; 总访问量 1,234 次 &mdash; 订阅 RSS
+  </footer>
+
+</div>
+</body>
+</html>

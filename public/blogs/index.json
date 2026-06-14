@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "Hello World — 博客搭建记录",
+    "tags": [
+      "博客"
+    ],
+    "date": "2026-06-14",
+    "summary": "用 Next.js + TypeScript 搭建个人博客的完整记录。",
+    "category": "开发",
+    "cover": "",
+    "hidden": false
+  },
+  {
+    "slug": "typography",
+    "title": "排版：活字印刷留给数字时代的遗产",
+    "tags": [
+      "设计",
+      "排版"
+    ],
+    "date": "2026-06-14",
+    "summary": "谷登堡未必能料到，他在十五世纪摆弄的那些铅字，会在五百年后以一种他完全无法理解的方式影响着数十亿人的阅读。",
+    "category": "排版",
+    "cover": "",
+    "hidden": false
+  },
+  {
+    "slug": "white",
+    "title": "原研哉的「白」：空空荡荡，包罗万象",
+    "tags": [
+      "设计",
+      "读书"
+    ],
+    "date": "2026-06-05",
+    "summary": "白不是一种颜色，而是一种容纳性。一张白纸不是空的，它包含着一切尚未落笔的想法。",
+    "category": "阅读笔记",
+    "hidden": false
+  },
+  {
+    "slug": "ways-of-seeing",
+    "title": "从《观看之道》到「被观看」的日常",
+    "tags": [
+      "读书",
+      "艺术"
+    ],
+    "date": "2026-05-28",
+    "summary": "约翰·伯格在《观看之道》中开篇写道：观看先于言语。",
+    "category": "读书",
+    "cover": "https://picsum.photos/seed/ways-of-seeing/800/400",
+    "hidden": false
+  }
+]

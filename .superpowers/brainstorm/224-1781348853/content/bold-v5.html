@@ -1,0 +1,262 @@
+<h2>三个有差异性的布局方向</h2>
+<p class="subtitle">全都是中国古典+报纸风格，但有真正的区分度。选一个方向我再细化</p>
+
+<!-- ============ OPTION A: Side Marginal Notes ============ -->
+<div class="section">
+  <h3 style="margin:0 0 12px 0;font-family:'Noto Serif SC',serif;font-size:18px;color:#4a3f35">A. 侧批式 — 正文居中 · 两侧留白批注</h3>
+  <p class="subtitle" style="margin:0 0 16px 0">
+    像线装书的眉批与脚注。正文窄栏居中，左右两侧留白区域放置日期、标签、编号——不是"空着"，而是"有内容的留白"。
+  </p>
+  <div style="background:#F4F2EC;padding:32px 20px;font-family:'Noto Serif SC','KaiTi',serif;line-height:1.8;color:#2A2A28;border:1px solid #D9D6CD">
+
+    <!-- issue number + date as marginal elements -->
+    <div style="position:relative;max-width:680px;margin:0 auto">
+
+      <!-- top bar: only the essentials in tiny margins -->
+      <div style="display:flex;align-items:flex-end;margin-bottom:40px">
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#B83A2E;letter-spacing:4px;font-family:'KaiTi',serif;margin-right:8px">Vol. 壹</div>
+        <div style="flex:1;text-align:center">
+          <h1 style="font-family:'KaiTi','Noto Serif SC',serif;font-size:36px;font-weight:400;margin:0;color:#2A2A28;letter-spacing:14px">闲 笔 日 报</h1>
+          <div style="width:32px;height:2px;background:#B83A2E;margin:8px auto"></div>
+          <div style="font-size:10px;color:#968E84;letter-spacing:3px">公元 2026 年 6 月 13 日 · 戊申年五月初三</div>
+        </div>
+        <!-- date on right margin -->
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#968E84;letter-spacing:2px;font-family:'KaiTi',serif;margin-left:8px">仲夏</div>
+      </div>
+
+      <!-- NAV as thin right margin column -->
+      <div style="flex-direction:column;writing-mode:vertical-lr;margin-bottom:40px">
+        <div style="display:flex;gap:24px;font-size:10px;color:#968E84;letter-spacing:3px">
+          <span style="color:#B83A2E">01</span> 首页
+          <span style="color:#7C7B76;margin:0 4px">/</span>
+          <span style="color:#7C7B76">02</span> 博客
+          <span style="color:#7C7B76;margin:0 4px">/</span>
+          <span style="color:#7C7B76">03</span> 关于
+          <span style="color:#7C7B76;margin:0 4px">/</span>
+          <span style="color:#7C7B76">04</span> 友链
+          <span style="color:#7C7B76;margin:0 4px">/</span>
+          <span style="color:#7C7B76">05</span> 项目
+        </div>
+      </div>
+    </div>
+    <!-- Actually no, this is getting complicated. Let me use a simpler visual approach. -->
+
+    <!-- Cleaner marginal note layout -->
+    <div style="display:flex;gap:32px;max-width:780px;margin:0 auto">
+      <!-- LEFT MARGIN: meta info -->
+      <div style="width:60px;flex-shrink:0;padding-top:6px;text-align:right">
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#B83A2E;letter-spacing:4px;font-family:'KaiTi',serif;margin-bottom:24px">卷壹</div>
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#968E84;letter-spacing:2px;font-family:'KaiTi',serif">戊申 · 仲夏</div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div style="flex:1;border-left:1px solid #E8E4DC;border-right:1px solid #E8E4DC;padding:0 28px">
+        <h1 style="text-align:center;font-family:'KaiTi','Noto Serif SC',serif;font-size:32px;font-weight:400;margin:0 0 4px 0;color:#2A2A28;letter-spacing:10px">闲 笔 日 报</h1>
+        <div style="text-align:center;font-size:9px;color:#968E84;letter-spacing:3px;margin-bottom:24px">公元 2026 年 6 月 13 日 · 五月初三</div>
+
+        <!-- article -->
+        <div style="margin-bottom:28px">
+          <div style="font-size:8px;color:#B83A2E;letter-spacing:4px;margin-bottom:12px">FEATURE</div>
+          <h2 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:22px;font-weight:600;margin:0 0 10px 0;color:#2A2A28;line-height:1.35;letter-spacing:3px">设计的无声力量</h2>
+          <p style="font-size:14px;color:#4A4640;line-height:1.85;margin:0;text-indent:2em;text-align:justify">
+            好的设计不喧哗，却自有其声。读者在看见第一个字之前，版式间距字体已在替他做判断。宋人刻书匠人，一笔一画刻入梨木，调墨试印再修正。今日网页排版也该存这份敬字之心。
+          </p>
+          <!-- numbered footnote reference -->
+          <div style="font-size:9px;color:#B83A2E;margin-top:8px;font-family:'KaiTi',serif">* 参见原研哉《白》第三章</div>
+        </div>
+
+        <div style="margin-bottom:20px">
+          <div style="font-size:8px;color:#B83A2E;letter-spacing:4px;margin-bottom:12px">TYPEFACE</div>
+          <h3 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:16px;font-weight:600;margin:0 0 6px 0;color:#2A2A28;letter-spacing:2px">字体的力量</h3>
+          <p style="font-size:14px;color:#4A4640;line-height:1.7;margin:0;text-indent:2em;text-align:justify">
+            宋体之于中文，恰如 Caslon 之于西文——经典、端庄、有书卷气。
+          </p>
+        </div>
+
+        <div>
+          <div style="font-size:8px;color:#B83A2E;letter-spacing:4px;margin-bottom:12px">READING</div>
+          <h3 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:16px;font-weight:600;margin:0 0 6px 0;color:#2A2A28;letter-spacing:2px">夏日书单 · 丙午</h3>
+          <p style="font-size:14px;color:#4A4640;line-height:1.7;margin:0;text-indent:2em;text-align:justify">
+            六本改变我思考方式的好书。原研哉《设计中的设计》、卡尼曼《思考，快与慢》。
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT MARGIN: nav + categories -->
+      <div style="width:60px;flex-shrink:0;padding-top:6px">
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#7C7B76;letter-spacing:4px;font-family:'KaiTi',serif;margin-bottom:16px">
+          <span style="color:#B83A2E">01</span> 首页
+        </div>
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#7C7B76;letter-spacing:4px;font-family:'KaiTi',serif;margin-bottom:16px">
+          <span style="color:#968E84">02</span> 博客
+        </div>
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#7C7B76;letter-spacing:4px;font-family:'KaiTi',serif;margin-bottom:16px">
+          <span style="color:#968E84">03</span> 关于
+        </div>
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#7C7B76;letter-spacing:4px;font-family:'KaiTi',serif;margin-bottom:16px">
+          <span style="color:#968E84">04</span> 友链
+        </div>
+        <div style="writing-mode:vertical-lr;font-size:10px;color:#7C7B76;letter-spacing:4px;font-family:'KaiTi',serif">
+          <span style="color:#968E84">05</span> 项目
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;font-size:10px;color:#968E84;letter-spacing:2px">
+      ── ✦ 闲笔日报 · 卷壹 ✦ ──
+    </div>
+  </div>
+</div>
+
+<!-- ============ OPTION B: Big Headline Magazine ============ -->
+<div class="section" style="margin-top:40px">
+  <h3 style="margin:0 0 12px 0;font-family:'Noto Serif SC',serif;font-size:18px;color:#4a3f35">B. 巨幅标题式 — 超级大字 + 密集小字对比</h3>
+  <p class="subtitle" style="margin:0 0 16px 0">
+    像报纸头版的头条——一篇主导文章占据上方压倒性版面，其余文章在下半部以多栏小字排开。大与小的极端对比。
+  </p>
+  <div style="background:#F4F2EC;padding:36px 40px 28px;font-family:'Noto Serif SC','KaiTi',serif;line-height:1.8;color:#2A2A28;border:1px solid #D9D6CD;max-width:760px;margin:0 auto">
+
+    <!-- top mini bar -->
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:#968E84;letter-spacing:2px;margin-bottom:16px">
+      <span>卷壹 · 戊申仲夏 · 公元 2026.06.13</span>
+      <span>01 / 02 / 03 / 04 / 05</span>
+    </div>
+    <div style="border-top:1px solid #D9D6CD"></div>
+
+    <!-- masthead: clean -->
+    <div style="text-align:center;padding:8px 0 4px">
+      <span style="font-family:'KaiTi',serif;font-size:14px;color:#B83A2E;letter-spacing:4px">闲笔日报</span>
+    </div>
+    <div style="border-bottom:2px solid #2A2A28"></div>
+
+    <!-- HUGE HERO HEADLINE -->
+    <div style="padding:32px 0 24px;border-bottom:1px solid #D9D6CD">
+      <h2 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:48px;font-weight:700;margin:0 0 20px 0;color:#2A2A28;line-height:1.15;letter-spacing:4px;text-align:center">
+        设计的<br>无声力量
+      </h2>
+      <div style="display:flex;gap:24px;font-size:13px;color:#4A4640;line-height:1.75">
+        <p style="flex:1;margin:0;text-indent:2em;text-align:justify">好的设计不喧哗，却自有其声。读者在看见第一个字之前，版式、间距、字体已经在替他做出判断——这个内容值不值得信赖。</p>
+        <p style="flex:1;margin:0;text-indent:2em;text-align:justify">宋人刻书匠人，一笔一画刻入梨木。调墨、试印、再修正。今日网页排版也该存这份"敬字"之心。日本设计大师原研哉在《白》中写道——白不是一种颜色，而是一种容纳性。</p>
+        <p style="flex:1;margin:0;text-indent:2em;text-align:justify">留白不是浪费。它是给思想的栖居。在这个信息过载的时代，让读者的眼睛在字里行间找到呼吸的空间，本身就是一种设计的善意。</p>
+      </div>
+      <div style="text-align:right;margin-top:12px;font-size:11px;color:#7C7B76">Allen · 六月十三 · <span style="color:#B83A2E">*</span></div>
+    </div>
+
+    <!-- bottom: tight multi-column small stories -->
+    <div style="display:flex;gap:0;margin-top:16px">
+      <div style="flex:1;padding-right:16px;border-right:1px solid #E8E4DC">
+        <div style="font-size:8px;color:#B83A2E;letter-spacing:3px;margin-bottom:6px">TYPOGRAPHY</div>
+        <h4 style="font-size:13px;font-weight:600;margin:0 0 4px 0;letter-spacing:1px">字体的力量</h4>
+        <p style="font-size:11px;color:#4A4640;line-height:1.6;margin:0">宋体之于中文，恰如Caslon之于西文——端庄、经典、有书卷气。</p>
+      </div>
+      <div style="flex:1;padding:0 16px;border-right:1px solid #E8E4DC">
+        <div style="font-size:8px;color:#B83A2E;letter-spacing:3px;margin-bottom:6px">ESSAY</div>
+        <h4 style="font-size:13px;font-weight:600;margin:0 0 4px 0;letter-spacing:1px">慢煮夏日</h4>
+        <p style="font-size:11px;color:#4A4640;line-height:1.6;margin:0">在快节奏中慢下来。一杯手冲之温、梧桐之声、旧书之味。</p>
+      </div>
+      <div style="flex:1;padding:0 16px;border-right:1px solid #E8E4DC">
+        <div style="font-size:8px;color:#B83A2E;letter-spacing:3px;margin-bottom:6px">READING</div>
+        <h4 style="font-size:13px;font-weight:600;margin:0 0 4px 0;letter-spacing:1px">夏日书单</h4>
+        <p style="font-size:11px;color:#4A4640;line-height:1.6;margin:0">六本好书：原研哉《设计中的设计》、卡尼曼《思考，快与慢》。</p>
+      </div>
+      <div style="flex:1;padding-left:16px">
+        <div style="font-size:8px;color:#B83A2E;letter-spacing:3px;margin-bottom:6px">PROJECT</div>
+        <h4 style="font-size:13px;font-weight:600;margin:0 0 4px 0;letter-spacing:1px">闲笔引擎</h4>
+        <p style="font-size:11px;color:#4A4640;line-height:1.6;margin:0">一个为安静写作而生的博客框架。无算法、无推荐、无点赞。</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:28px;font-size:10px;color:#968E84;letter-spacing:3px">
+      ❦ 卷壹完 ❦
+    </div>
+  </div>
+</div>
+
+<!-- ============ OPTION C: Journal Side Note ============ -->
+<div class="section" style="margin-top:40px">
+  <h3 style="margin:0 0 12px 0;font-family:'Noto Serif SC',serif;font-size:18px;color:#4a3f35">C. 稿纸批注式 — 非对称 · 正文靠左 · 右边批注笔记</h3>
+  <p class="subtitle" style="margin:0 0 16px 0">
+    给每篇文章旁边留出手写批注的感觉。正文区内文严肃，右侧小字像旁人的读书笔记，有温度、有"人味儿"。
+  </p>
+  <div style="background:#F4F2EC;padding:32px 36px;font-family:'Noto Serif SC','KaiTi',serif;line-height:1.8;color:#2A2A28;border:1px solid #D9D6CD;max-width:760px;margin:0 auto">
+
+    <div style="text-align:center;margin-bottom:28px">
+      <span style="font-family:'KaiTi',serif;font-size:12px;color:#7C7B76;letter-spacing:3px">闲笔日报 · 卷壹</span>
+      <div style="width:24px;height:1px;background:#B83A2E;margin:6px auto"></div>
+    </div>
+
+    <!-- Article 1: article left + notes right -->
+    <div style="display:flex;gap:28px;margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid #E8E4DC">
+      <div style="flex:3">
+        <h2 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:22px;font-weight:600;margin:0 0 6px 0;letter-spacing:2px;line-height:1.3">设计的无声力量</h2>
+        <div style="font-size:10px;color:#968E84;margin-bottom:10px;letter-spacing:1px">Allen · 六月十三</div>
+        <p style="font-size:14px;color:#4A4640;line-height:1.8;margin:0;text-indent:2em;text-align:justify">
+          好的设计不喧哗，却自有其声。在读者注意到第一个字之前，版式、间距、字体已经在替他做出判断——这个内容值不值得信赖。宋人刻书匠人，一笔一画刻入梨木，调墨、试印、再修正。
+        </p>
+        <div style="font-size:9px;color:#B83A2E;margin-top:6px;letter-spacing:1px">* 设计思考 · 排版 · 极简主义</div>
+      </div>
+      <!-- annotation column -->
+      <div style="flex:1;border-left:1px dotted #D9D6CD;padding-left:16px">
+        <div style="font-family:'KaiTi',serif;font-size:10px;color:#B83A2E;line-height:1.6">
+          <div style="margin-bottom:12px">"敬字"二字写得真好。数字时代最缺的就是对字的敬畏。</div>
+          <div style="margin-bottom:12px">想起祖父书架上那套民国排印版的《古文观止》，每页都有他的朱笔批注。</div>
+          <div>设计师 Paul Rand 也说过——设计是沉默的大使。</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:28px;margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid #E8E4DC">
+      <div style="flex:3">
+        <h3 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:16px;font-weight:600;margin:0 0 6px 0;letter-spacing:1px">字体的力量</h3>
+        <div style="font-size:10px;color:#968E84;margin-bottom:8px;letter-spacing:1px">六月十日</div>
+        <p style="font-size:14px;color:#4A4640;line-height:1.7;margin:0;text-indent:2em;text-align:justify">
+          宋体之于中文，恰如 Caslon 之于西文——经典、端庄、有书卷气。思源宋体屏显表现优越，字重齐全。
+        </p>
+      </div>
+      <div style="flex:1;border-left:1px dotted #D9D6CD;padding-left:16px">
+        <div style="font-family:'KaiTi',serif;font-size:10px;color:#B83A2E;line-height:1.6">
+          我一直觉得宋体印刷出来比黑体好看太多，网页上也该多用。
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:28px">
+      <div style="flex:3">
+        <h3 style="font-family:'Noto Serif SC','KaiTi',serif;font-size:16px;font-weight:600;margin:0 0 6px 0;letter-spacing:1px">慢煮夏日 · 夏日书单</h3>
+        <div style="font-size:10px;color:#968E84;margin-bottom:8px;letter-spacing:1px">六月八日 · 六月二日</div>
+        <p style="font-size:14px;color:#4A4640;line-height:1.7;margin:0;text-indent:2em;text-align:justify">
+          在快节奏中学会慢下来。六本好书：《设计中的设计》《思考，快与慢》《观看之道》。
+        </p>
+      </div>
+      <div style="flex:1;border-left:1px dotted #D9D6CD;padding-left:16px">
+        <div style="font-family:'KaiTi',serif;font-size:10px;color:#B83A2E;line-height:1.6">
+          《观看之道》改变了我对图像的整个理解方式，强烈推荐。
+        </div>
+      </div>
+    </div>
+
+    <!-- nav as thin bottom strip -->
+    <div style="text-align:center;margin-top:28px;padding-top:16px;border-top:1px solid #D9D6CD;font-size:10px;color:#7C7B76;letter-spacing:3px">
+      01 首页 / 02 博客 / 03 关于 / 04 友链 / 05 项目
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:32px;padding:20px 24px;background:#fdfaf0;border:1px solid #e0d8c0;border-radius:4px">
+  <h3 style="margin:0 0 12px 0;font-family:'Noto Serif SC',serif;font-size:15px;color:#5a4636">三个方向的"亮点"</h3>
+  <table style="width:100%;font-size:12px;color:#5a4636;border-collapse:collapse">
+    <tr style="border-bottom:1px solid #e0d8c0">
+      <td style="padding:8px;font-weight:700;vertical-align:top;width:140px">A · 侧批式</td>
+      <td style="padding:8px">竖排导航在侧边、正文窄栏居中——像古籍的"天头地脚"有批注空间。键盘时代没人这么排版，有辨识度。</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e0d8c0">
+      <td style="padding:8px;font-weight:700;vertical-align:top">B · 巨幅标题式</td>
+      <td style="padding:8px">48px 超大标题压倒性第一屏，下半部 4 栏密集小字——大小对撞的张力。报纸头版的经典手法，网页上用很少见。</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;font-weight:700;vertical-align:top">C · 稿纸批注式</td>
+      <td style="padding:8px">正文靠左 + 右边虚线分隔 + 朱砂色手写批注——每篇文章像被打过读书笔记。有"人味"，不冷。</td>
+    </tr>
+  </table>
+  <p style="margin:8px 0 0 0;font-size:11px;color:#8c8070">三个方向都用了 Monocle × MUJI 的配色系统（暖纸 + 墨色 + 朱砂红），区别在<strong>布局策略</strong>。挑一个方向，我往下做完整的页面设计。</p>
+</div>

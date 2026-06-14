@@ -1,0 +1,245 @@
+<h2>加交互 — 暗色切换 + hover</h2>
+<p class="subtitle">左边亮色 / 右边暗色 · 卡片鼠标划过有反馈 · 导航高亮当前页</p>
+
+<div class="split">
+
+  <!-- ============ LIGHT MODE ============ -->
+  <div class="mockup">
+    <div class="mockup-header">亮色 · 当前页高亮 + hover</div>
+    <div class="mockup-body">
+      <div style="background:#F4F2EC;font-family:'Noto Serif SC','KaiTi',serif;color:#2A2A28;padding:0">
+        <div style="background:#FAF8F4;border-left:1px solid #D9D6CD;border-right:1px solid #D9D6CD;box-shadow:0 0 40px rgba(0,0,0,0.03);padding:32px 40px">
+
+          <!-- TOP BAR -->
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #D9D6CD;margin-bottom:24px;font-size:10px;color:#968E84;letter-spacing:2px">
+            <span style="font-family:'KaiTi',serif">戊申年 · 仲夏 · 五月初三 · 公元 2026.06.13</span>
+            <!-- dark mode toggle -->
+            <span style="border:1px solid #C8C2B0;padding:3px 12px;font-size:9px;cursor:pointer;letter-spacing:1px;transition:all 0.2s;color:#7a6e55">暗色</span>
+          </div>
+
+          <!-- MASTHEAD -->
+          <div style="text-align:center;margin-bottom:20px">
+            <span style="font-size:8px;color:#B83A2E;letter-spacing:4px">THE RIGOR OF LANGUAGE</span>
+            <h1 style="font-size:32px;font-weight:600;margin:4px 0 0 0;letter-spacing:8px">闲 笔 日 报</h1>
+            <div style="font-size:9px;color:#968E84;letter-spacing:2px;margin-top:4px">慢下来，写点什么</div>
+          </div>
+
+          <!-- NAV — current page highlighted -->
+          <div style="display:flex;justify-content:center;gap:28px;margin-bottom:28px;font-size:10px;letter-spacing:2px;color:#968E84">
+            <span style="color:#B83A2E;border-bottom:1px solid #B83A2E;padding-bottom:3px">Posts</span>
+            <span>实验室</span>
+            <span>书签</span>
+            <span>关于</span>
+          </div>
+
+          <!-- 瑞鹤图 -->
+          <div style="margin-bottom:32px;border:1px solid #D9D6CD;overflow:hidden;position:relative">
+            <div style="height:200px;background:#E8E4DC;display:flex;align-items:center;justify-content:center;position:relative">
+              <svg viewBox="0 0 700 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="skyL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8D8E8"/><stop offset="100%" stop-color="#E8D8C0"/></linearGradient></defs>
+                <rect width="700" height="200" fill="url(#skyL)"/>
+                <rect x="150" y="160" width="400" height="3" fill="#4A4640"/>
+                <polygon points="350,145 150,165 550,165" fill="#6A4A3A" opacity="0.5"/>
+                <g stroke="#3A3A38" stroke-width="0.7" fill="none">
+                  <path d="M 100 55 Q 105 45, 112 40 Q 108 50, 103 57 Z"/>
+                  <path d="M 200 40 Q 208 28, 215 25 Q 210 35, 205 42 Z"/>
+                  <path d="M 320 38 Q 326 28, 332 24 Q 328 34, 323 38 Z"/>
+                  <path d="M 450 42 Q 456 32, 462 28 Q 458 38, 453 44 Z"/>
+                  <path d="M 560 50 Q 566 40, 572 36 Q 568 46, 563 52 Z"/>
+                </g>
+                <text x="660" y="195" text-anchor="end" font-family="'KaiTi',serif" font-size="10" fill="#4A4640" opacity="0.35">瑞鹤图 · 宋徽宗</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 3 CARDS with hover effects -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:28px">
+
+            <!-- card 1: hover = slight lift + border change -->
+            <div style="border:1px solid #D9D6CD;background:#FEFDFA;overflow:hidden;transition:all 0.2s;cursor:pointer;position:relative">
+              <div style="height:100px;overflow:hidden;border-bottom:1px solid #D9D6CD;background:#E8E4DC">
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#A89888">TYPOGRAPHY</div>
+              </div>
+              <div style="padding:18px">
+                <div style="font-size:7px;color:#B83A2E;letter-spacing:2px;margin-bottom:6px">TYPOGRAPHY</div>
+                <h3 style="font-size:15px;font-weight:600;margin:0 0 6px 0;line-height:1.2">字体的力量</h3>
+                <p style="font-size:11px;color:#4A4640;line-height:1.5;margin:0">宋体之于中文，恰如Caslon之于西文——经典端庄。</p>
+                <div style="font-size:8px;color:#968E84;margin-top:8px">六月十日</div>
+              </div>
+              <!-- hover indicator -->
+              <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:#B83A2E;transform:scaleX(0);transition:transform 0.2s"></div>
+            </div>
+
+            <!-- card 2: pure text -->
+            <div style="border:1px solid #D9D6CD;background:#FEFDFA;padding:24px 18px;transition:all 0.2s;cursor:pointer;position:relative">
+              <div style="font-size:7px;color:#B83A2E;letter-spacing:2px;margin-bottom:6px">ESSAY</div>
+              <h3 style="font-size:15px;font-weight:600;margin:0 0 6px 0;line-height:1.2">慢煮夏日</h3>
+              <p style="font-size:11px;color:#4A4640;line-height:1.5;margin:0">在快节奏中慢下来。手冲咖啡、梧桐树叶、旧书油墨。</p>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #E8E4DC;font-size:8px;color:#968E84">
+                <span>六月八日</span><span style="color:#B83A2E;font-size:10px">✦</span>
+              </div>
+              <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:#B83A2E;transform:scaleX(0);transition:transform 0.2s"></div>
+            </div>
+
+            <!-- card 3: compact -->
+            <div style="border:1px solid #D9D6CD;background:#FEFDFA;padding:22px 18px;transition:all 0.2s;cursor:pointer;position:relative">
+              <div style="font-size:7px;color:#B83A2E;letter-spacing:2px;margin-bottom:6px">READING</div>
+              <h3 style="font-size:14px;font-weight:600;margin:0 0 4px 0;line-height:1.2">夏日书单</h3>
+              <p style="font-size:11px;color:#4A4640;line-height:1.5;margin:0">《设计中的设计》原研哉、《思考，快与慢》卡尼曼、《观看之道》约翰·伯格。</p>
+              <div style="font-size:8px;color:#968E84;margin-top:8px">六月二日</div>
+              <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:#B83A2E;transform:scaleX(0);transition:transform 0.2s"></div>
+            </div>
+          </div>
+
+          <!-- LEAD -->
+          <div style="border:1px solid #D9D6CD;background:#FEFDFA;overflow:hidden;transition:all 0.2s;cursor:pointer;margin-bottom:28px">
+            <div style="height:160px;overflow:hidden;border-bottom:1px solid #D9D6CD;background:#E8E4DC;display:flex;align-items:center;justify-content:center;font-size:16px;color:#A89888">Feature Image</div>
+            <div style="padding:28px 32px">
+              <div style="font-size:7px;color:#B83A2E;letter-spacing:3px;margin-bottom:10px">FEATURE · 头条</div>
+              <h2 style="font-size:24px;font-weight:600;margin:0 0 10px 0;line-height:1.15">设计的无声力量</h2>
+              <p style="font-size:13px;color:#4A4640;line-height:1.7;margin:0">
+                好的设计不喧哗，却自有其声。在读者注意到第一个字之前，版式、间距、字体已经在替他做出判断。
+              </p>
+              <div style="font-size:9px;color:#968E84;margin-top:10px">Allen · 六月十三 · 阅读六分钟</div>
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+          <div style="border-top:1px solid #D9D6CD;padding-top:14px;font-size:9px;color:#968E84;display:flex;justify-content:space-between;letter-spacing:1px">
+            <span>© 2026 闲笔日报</span>
+            <span>总访问量 <span style="color:#B83A2E">1,234</span> 次</span>
+            <span>The rigor of language.</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DARK MODE ============ -->
+  <div class="mockup">
+    <div class="mockup-header">暗色 · 当前页高亮 + hover</div>
+    <div class="mockup-body">
+      <div style="background:#1E1C18;font-family:'Noto Serif SC','KaiTi',serif;color:#C8C0B0;padding:0">
+        <div style="background:#22201C;border-left:1px solid #3A3530;border-right:1px solid #3A3530;box-shadow:0 0 40px rgba(0,0,0,0.2);padding:32px 40px">
+
+          <!-- TOP BAR -->
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #3A3530;margin-bottom:24px;font-size:10px;color:#7A7468;letter-spacing:2px">
+            <span style="font-family:'KaiTi',serif">戊申年 · 仲夏 · 五月初三 · 公元 2026.06.13</span>
+            <span style="border:1px solid #5A544A;padding:3px 12px;font-size:9px;cursor:pointer;letter-spacing:1px;transition:all 0.2s;color:#B0A898">亮色</span>
+          </div>
+
+          <!-- MASTHEAD -->
+          <div style="text-align:center;margin-bottom:20px">
+            <span style="font-size:8px;color:#B83A2E;letter-spacing:4px">THE RIGOR OF LANGUAGE</span>
+            <h1 style="font-size:32px;font-weight:600;margin:4px 0 0 0;letter-spacing:8px;color:#D0C8B8">闲 笔 日 报</h1>
+            <div style="font-size:9px;color:#7A7468;letter-spacing:2px;margin-top:4px">慢下来，写点什么</div>
+          </div>
+
+          <!-- NAV -->
+          <div style="display:flex;justify-content:center;gap:28px;margin-bottom:28px;font-size:10px;letter-spacing:2px;color:#7A7468">
+            <span style="color:#B83A2E;border-bottom:1px solid #B83A2E;padding-bottom:3px">Posts</span>
+            <span>实验室</span>
+            <span>书签</span>
+            <span>关于</span>
+          </div>
+
+          <!-- 瑞鹤图 dark version -->
+          <div style="margin-bottom:32px;border:1px solid #3A3530;overflow:hidden;position:relative">
+            <div style="height:200px;background:#2A2824;display:flex;align-items:center;justify-content:center;position:relative">
+              <svg viewBox="0 0 700 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="skyD" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2A3040"/><stop offset="100%" stop-color="#3A3028"/></linearGradient></defs>
+                <rect width="700" height="200" fill="url(#skyD)"/>
+                <rect x="150" y="160" width="400" height="3" fill="#6A6458"/>
+                <polygon points="350,145 150,165 550,165" fill="#4A4030" opacity="0.5"/>
+                <g stroke="#8A8480" stroke-width="0.7" fill="none">
+                  <path d="M 100 55 Q 105 45, 112 40 Q 108 50, 103 57 Z"/>
+                  <path d="M 200 40 Q 208 28, 215 25 Q 210 35, 205 42 Z"/>
+                  <path d="M 320 38 Q 326 28, 332 24 Q 328 34, 323 38 Z"/>
+                  <path d="M 450 42 Q 456 32, 462 28 Q 458 38, 453 44 Z"/>
+                  <path d="M 560 50 Q 566 40, 572 36 Q 568 46, 563 52 Z"/>
+                </g>
+                <text x="660" y="195" text-anchor="end" font-family="'KaiTi',serif" font-size="10" fill="#8A8480" opacity="0.3">瑞鹤图 · 宋徽宗</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 3 CARDS dark -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:28px">
+            <div style="border:1px solid #3A3530;background:#282420;overflow:hidden;transition:all 0.2s;cursor:pointer;position:relative">
+              <div style="height:100px;overflow:hidden;border-bottom:1px solid #3A3530;background:#2A2824;display:flex;align-items:center;justify-content:center;font-size:12px;color:#6A6458">TYPOGRAPHY</div>
+              <div style="padding:18px">
+                <div style="font-size:7px;color:#B83A2E;letter-spacing:2px;margin-bottom:6px">TYPOGRAPHY</div>
+                <h3 style="font-size:15px;font-weight:600;margin:0 0 6px 0;line-height:1.2;color:#D0C8B8">字体的力量</h3>
+                <p style="font-size:11px;color:#A09888;line-height:1.5;margin:0">宋体之于中文，恰如Caslon之于西文——经典端庄。</p>
+                <div style="font-size:8px;color:#7A7468;margin-top:8px">六月十日</div>
+              </div>
+            </div>
+            <div style="border:1px solid #3A3530;background:#282420;padding:24px 18px;transition:all 0.2s;cursor:pointer;position:relative">
+              <div style="font-size:7px;color:#B83A2E;letter-spacing:2px;margin-bottom:6px">ESSAY</div>
+              <h3 style="font-size:15px;font-weight:600;margin:0 0 6px 0;line-height:1.2;color:#D0C8B8">慢煮夏日</h3>
+              <p style="font-size:11px;color:#A09888;line-height:1.5;margin:0">学会在快节奏中慢下来。一杯手冲之温、梧桐之声。</p>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #3A3530;font-size:8px;color:#7A7468">
+                <span>六月八日</span><span style="color:#B83A2E;font-size:10px">✦</span>
+              </div>
+            </div>
+            <div style="border:1px solid #3A3530;background:#282420;padding:22px 18px;transition:all 0.2s;cursor:pointer;position:relative">
+              <div style="font-size:7px;color:#B83A2E;letter-spacing:2px;margin-bottom:6px">READING</div>
+              <h3 style="font-size:14px;font-weight:600;margin:0 0 4px 0;line-height:1.2;color:#D0C8B8">夏日书单</h3>
+              <p style="font-size:11px;color:#A09888;line-height:1.5;margin:0">《设计中的设计》原研哉、《思考，快与慢》卡尼曼、《观看之道》约翰·伯格。</p>
+              <div style="font-size:8px;color:#7A7468;margin-top:8px">六月二日</div>
+            </div>
+          </div>
+
+          <!-- LEAD dark -->
+          <div style="border:1px solid #3A3530;background:#282420;overflow:hidden;transition:all 0.2s;cursor:pointer;margin-bottom:28px">
+            <div style="height:160px;overflow:hidden;border-bottom:1px solid #3A3530;background:#2A2824;display:flex;align-items:center;justify-content:center;font-size:16px;color:#6A6458">Feature Image</div>
+            <div style="padding:28px 32px">
+              <div style="font-size:7px;color:#B83A2E;letter-spacing:3px;margin-bottom:10px">FEATURE · 头条</div>
+              <h2 style="font-size:24px;font-weight:600;margin:0 0 10px 0;line-height:1.15;color:#D0C8B8">设计的无声力量</h2>
+              <p style="font-size:13px;color:#A09888;line-height:1.7;margin:0">
+                好的设计不喧哗，却自有其声。在读者注意到第一个字之前，版式、间距、字体已经在替他做出判断。
+              </p>
+              <div style="font-size:9px;color:#7A7468;margin-top:10px">Allen · 六月十三 · 阅读六分钟</div>
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+          <div style="border-top:1px solid #3A3530;padding-top:14px;font-size:9px;color:#7A7468;display:flex;justify-content:space-between;letter-spacing:1px">
+            <span>© 2026 闲笔日报</span>
+            <span>总访问量 <span style="color:#B83A2E">1,234</span> 次</span>
+            <span>The rigor of language.</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:24px;padding:16px 20px;background:#fdfaf0;border:1px solid #e0d8c0;border-radius:4px">
+  <h3 style="margin:0 0 8px 0;font-family:'Noto Serif SC',serif;font-size:14px;color:#5a4636">要加的交互（实际实现）</h3>
+  <table style="width:100%;font-size:12px;color:#5a4636;border-collapse:collapse">
+    <tr style="border-bottom:1px solid #e0d8c0">
+      <td style="padding:6px 8px;font-weight:700;width:100px">暗色切换</td>
+      <td style="padding:6px 8px">右上角"暗色/亮色"按钮，CSS class 切换，存 localStorage 记住用户选择</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e0d8c0">
+      <td style="padding:6px 8px;font-weight:700">hover 下划线</td>
+      <td style="padding:6px 8px">卡片底部一根朱砂红线，默认隐藏 scaleX(0)，hover 时展开 scaleX(1)</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e0d8c0">
+      <td style="padding:6px 8px;font-weight:700">hover 背景</td>
+      <td style="padding:6px 8px">卡片 hover 时 background 微亮，有"触感"反馈</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e0d8c0">
+      <td style="padding:6px 8px;font-weight:700">导航高亮</td>
+      <td style="padding:6px 8px">当前页加朱砂色下划线，一眼知道自己在哪</td>
+    </tr>
+    <tr>
+      <td style="padding:6px 8px;font-weight:700">暗色配色</td>
+      <td style="padding:6px 8px">底 #1E1C18 / 卡片 #282420 / 文字 #C8C0B0 / 标题 #D0C8B8 / 保持朱砂红</td>
+    </tr>
+  </table>
+</div>
