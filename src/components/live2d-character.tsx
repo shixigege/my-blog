@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const CDN = [
   "https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js",
-  "/live2d/live2d.min.js",
+  BASE + "/live2d/live2d.min.js",
   "https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.4.0/dist/cubism2.min.js",
 ];
 

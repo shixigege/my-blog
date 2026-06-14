@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export function AvatarDisplay({ author, fallback }: { author: string; fallback: string }) {
-  const [avatar, setAvatar] = useState(fallback);
+  const [avatar, setAvatar] = useState(fallback.startsWith("/") ? BASE + fallback : fallback);
 
   useEffect(() => {
     fetch("/api/config").then((r) => r.json()).then((cfg) => {
