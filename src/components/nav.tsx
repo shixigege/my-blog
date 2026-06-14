@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { AuthStatus } from "@/components/auth-status";
 
 const links = [
   { label: "首页", href: "/" },
@@ -12,12 +11,10 @@ const links = [
   { label: "标签", href: "/tags" },
   { label: "友链", href: "/friends" },
   { label: "关于", href: "/about" },
-  { label: "写作", href: "/write" },
 ];
 
 export function Nav() {
   const p = usePathname();
-  if (p.startsWith("/write")) return null;
   return (
     <nav className="text-center py-2 border-b border-border mb-0">
       <div className="flex items-center justify-center gap-1 text-sm flex-wrap">
@@ -37,8 +34,6 @@ export function Nav() {
         ))}
         <span className="text-border text-xs mx-1">·</span>
         <ThemeToggle />
-        <span className="text-border text-xs mx-1">·</span>
-        <AuthStatus />
       </div>
     </nav>
   );

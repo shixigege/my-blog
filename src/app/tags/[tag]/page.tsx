@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { getPosts } from "@/lib/posts-server";
+import { getAllTags } from "@/lib/posts";
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  const tags = getAllTags(posts);
+  return [...tags.keys()].map((tag) => ({ tag: encodeURIComponent(tag) }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }) {
   const { tag } = await params;

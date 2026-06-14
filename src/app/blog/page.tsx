@@ -34,10 +34,6 @@ export default async function BlogPage() {
                     {p.summary && <p className="text-xs text-text-secondary line-clamp-1 mt-0.5">{p.summary}</p>}
                   </div>
                   <div className="flex items-center gap-3 flex-shrink-0 ml-4">
-                    <Link href={`/write?slug=${p.slug}`}
-                      className="text-[.55rem] font-mono text-accent hover:underline opacity-0 group-hover:opacity-100 transition-opacity">
-                      编辑
-                    </Link>
                     <span className="text-xs text-text-secondary font-mono">{p.date}</span>
                   </div>
                 </Link>
