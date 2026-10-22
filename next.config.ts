@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   basePath,
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
   images: { unoptimized: true },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

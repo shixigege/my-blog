@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# shixigege's Blog
 
-## Getting Started
+计算机专业学生的个人博客 · 现代大报风格（Modern Broadsheet / Editorial Aesthetic）。
 
-First, run the development server:
+基于 Next.js 16、React 19、Tailwind CSS v4 与 TypeScript 构建，纯静态导出（SSG）并部署于 GitHub Pages。
+
+## 🌟 特性
+
+- **报纸排版美学**：中英双语大报头（Masthead）、报耳元数据（Ears）、双细线（Oxford Rules）与两栏排印导语。
+- **纯粹纸墨质感**：米白新闻纸、暖褐灰铅字、克制深红点缀，纯线条网格结构，无悬浮阴影。
+- **特派报童 Live2D**：版面自适应嵌入罗小黑看板娘，支持视线跟随、点击交互与极客台词气泡。
+- **静态导出与高性能**：所有专栏文章与标签页面均在构建期预渲染为纯静态 HTML，极速秒开。
+- **明暗夜读模式**：支持日间新闻纸版与暗室版画夜读质感切换。
+
+## 🛠️ 技术栈
+
+- **框架**：Next.js 16 (App Router, Turbopack)
+- **UI**：React 19 + TypeScript
+- **样式**：Tailwind CSS v4
+- **包管理**：pnpm
+- **部署**：GitHub Actions + GitHub Pages
+
+## 🚀 本地开发
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 安装依赖
+pnpm install
+
+# 启动本地开发服务 (http://localhost:3000/my-blog/)
 pnpm dev
-# or
-bun dev
+
+# 生产构建与静态导出验证
+pnpm build
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
