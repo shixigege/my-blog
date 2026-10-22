@@ -16,115 +16,118 @@ export function FriendApplyForm() {
   )}`;
 
   return (
-    <>
-      {/* 申请友链 */}
-      <section className="border-t-2 border-border pt-8 mt-8">
-        <h2 className="font-display text-lg font-bold text-text mb-4">申请友链</h2>
-        <div className="border border-border p-6 bg-accent-glow/10">
-          <p className="text-base text-text-secondary mb-4 leading-relaxed">
-            如果你拥有一个独立博客或技术站点，欢迎交换友链。请先在我的站点添加链接，然后填写以下信息提交申请。
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-            {[
-              { label: "站点名称", val: "你的博客名称" },
-              { label: "站点地址", val: "https://your-blog.com" },
-              { label: "站点简介", val: "一句话描述你的站点" },
-              { label: "联系邮箱", val: "your@email.com" },
-              { label: "站点头像", val: "https://your-blog.com/avatar.png" },
-            ].map((item) => (
-              <div key={item.label} className="text-sm text-text-secondary font-mono tracking-wider">
-                <span className="text-accent">▸</span> {item.label}：{item.val}
-              </div>
-            ))}
+    <section className="pt-6 border-t-2 border-rule-strong space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold font-mono tracking-widest text-ink uppercase flex items-center gap-2">
+          <span className="text-vermilion">◈</span>
+          <span>刊登申请 · CLASSIFIED APPLICATION</span>
+        </h2>
+        <span className="text-xs font-mono text-ink-muted">MAILTO PROTOCOL</span>
+      </div>
+
+      <div className="classified-box p-5 sm:p-6 space-y-5">
+        <p className="text-xs sm:text-sm font-serif text-ink-secondary leading-relaxed">
+          若您拥有原创内容丰富、持续维护的独立博客或极客主页，热烈欢迎交换刊登。
+          请先在贵站添加本报链接，随后填写下方填单，点击提交将调用邮件客户端发送申请。
+        </p>
+
+        {/* 本报信息提示 */}
+        <div className="p-3 bg-paper border border-rule text-xs font-mono text-ink-secondary space-y-1">
+          <div className="text-[0.68rem] text-vermilion font-bold uppercase mb-1">
+            本报预设信息：
           </div>
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              window.open(mailtoLink, "_blank");
-            }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[.75rem] text-accent font-mono tracking-widest mb-1 uppercase">站点名称 *</label>
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="你的博客名称"
-                  required
-                  className="w-full border border-border bg-card px-3 py-2.5 text-base text-text placeholder:text-text-secondary/40 outline-none focus:border-accent transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[.75rem] text-accent font-mono tracking-widest mb-1 uppercase">站点地址 *</label>
-                <input
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="https://your-blog.com"
-                  required
-                  className="w-full border border-border bg-card px-3 py-2.5 text-base text-text placeholder:text-text-secondary/40 outline-none focus:border-accent transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[.75rem] text-accent font-mono tracking-widest mb-1 uppercase">站点简介</label>
-                <input
-                  value={desc}
-                  onChange={(e) => setDesc(e.target.value)}
-                  placeholder="一句话描述你的站点"
-                  className="w-full border border-border bg-card px-3 py-2.5 text-base text-text placeholder:text-text-secondary/40 outline-none focus:border-accent transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[.75rem] text-accent font-mono tracking-widest mb-1 uppercase">联系邮箱</label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  type="email"
-                  className="w-full border border-border bg-card px-3 py-2.5 text-base text-text placeholder:text-text-secondary/40 outline-none focus:border-accent transition-colors"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-2">
-              <label className="block text-[.75rem] text-accent font-mono tracking-widest mb-1 uppercase">站点头像</label>
+          <div>名称：shixigege&apos;s Blog</div>
+          <div>地址：https://shixigege.github.io/my-blog/</div>
+          <div>简介：计算机专业学生， 技术 / 随想 / 日常</div>
+        </div>
+
+        {/* 申请表单 */}
+        <form
+          className="space-y-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            window.open(mailtoLink, "_blank");
+          }}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-[0.72rem] font-mono text-ink-muted mb-1 uppercase tracking-wider">
+                贵站名称 *
+              </label>
               <input
-                value={avatar}
-                onChange={(e) => setAvatar(e.target.value)}
-                placeholder="https://your-blog.com/avatar.png"
-                className="w-full border border-border bg-card px-3 py-2.5 text-base text-text placeholder:text-text-secondary/40 outline-none focus:border-accent transition-colors"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="例如：极客快讯"
+                required
+                className="w-full border border-rule bg-paper px-3 py-2 text-sm font-serif text-ink placeholder:text-ink-muted/50 outline-none focus:border-vermilion transition-colors"
               />
             </div>
+
+            <div>
+              <label className="block text-[0.72rem] font-mono text-ink-muted mb-1 uppercase tracking-wider">
+                贵站网址 *
+              </label>
+              <input
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder="https://example.com"
+                required
+                type="url"
+                className="w-full border border-rule bg-paper px-3 py-2 text-sm font-mono text-ink placeholder:text-ink-muted/50 outline-none focus:border-vermilion transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[0.72rem] font-mono text-ink-muted mb-1 uppercase tracking-wider">
+                一句话简述
+              </label>
+              <input
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                placeholder="一句话介绍您的主页与专栏"
+                className="w-full border border-rule bg-paper px-3 py-2 text-sm font-serif text-ink placeholder:text-ink-muted/50 outline-none focus:border-vermilion transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[0.72rem] font-mono text-ink-muted mb-1 uppercase tracking-wider">
+                联络邮箱
+              </label>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your-name@domain.com"
+                type="email"
+                className="w-full border border-rule bg-paper px-3 py-2 text-sm font-mono text-ink placeholder:text-ink-muted/50 outline-none focus:border-vermilion transition-colors"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-[0.72rem] font-mono text-ink-muted mb-1 uppercase tracking-wider">
+              站点头像 URL
+            </label>
+            <input
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              placeholder="https://example.com/avatar.jpg"
+              className="w-full border border-rule bg-paper px-3 py-2 text-sm font-mono text-ink placeholder:text-ink-muted/50 outline-none focus:border-vermilion transition-colors"
+            />
+          </div>
+
+          <div className="pt-2 flex items-center justify-between flex-wrap gap-3">
             <button
               type="submit"
-              className="border border-accent text-accent px-6 py-2.5 text-base font-mono tracking-wider hover:bg-accent hover:text-white transition-colors"
+              className="px-5 py-2 text-xs font-mono tracking-widest uppercase bg-rule-strong text-paper hover:bg-vermilion transition-colors cursor-pointer"
             >
-              提交申请 ↗
+              提交刊登申请 &rarr;
             </button>
-          </form>
-          <p className="text-sm text-text-secondary font-mono tracking-wider mt-4">
-            提交后将通过邮件发送申请，我会尽快处理。
-          </p>
-        </div>
-      </section>
-
-      {/* 申请须知 */}
-      <section className="mt-8">
-        <h2 className="font-display text-lg font-bold text-text mb-4">友链须知</h2>
-        <div className="border border-border p-6">
-          <ul className="space-y-2 text-base text-text-secondary">
-            {[
-              "博客内容原创、有料，非采集站",
-              "站点能正常访问，无违规内容",
-              "已在我的站点添加友链",
-            ].map((rule, i) => (
-              <li key={i} className="flex gap-2">
-                <span className="text-accent flex-shrink-0">◆</span>
-                <span>{rule}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    </>
+            <span className="text-[0.7rem] font-mono text-ink-muted">
+              * 提交后将唤起本地邮件客户端
+            </span>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 }

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:/Users/Yc/.claude/projects/d--my-blog/memory\" 2>/dev/null; echo \"---src---\"; find src -type f | sort; echo \"---public top---\"; ls public; echo \"---demo---\"; find retro-newspaper-demo -maxdepth 3 -type f | head -50)",
+      "Read(//c/Users/Yc/.claude/projects/d--my-blog/memory/**)"
+    ]
+  }
+}

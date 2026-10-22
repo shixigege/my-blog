@@ -1,206 +1,363 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { getPosts } from "@/lib/posts-server";
-import { wordCount, readingTime } from "@/lib/posts";
-import { ScrollReveal } from "@/components/scroll-reveal";
-import { Live2DCharacter } from "@/components/dynamic-live2d";
+import { getAllTags, readingTime, wordCount } from "@/lib/posts";
+import { AvatarDisplay } from "@/components/avatar-display";
+import { DynamicNewsboy } from "@/components/dynamic-live2d";
+import { promises as fs } from "fs";
+import path from "path";
 
-// ——— placeholder content for when there aren't enough real posts ———
-const storyPlaceholders = [
-  { slug: "", title: "排版：活字印刷留给数字时代的遗产", category: "技术笔记", summary: "谷登堡未必能料到，他在十五世纪摆弄的那些铅字，会在五百年后以一种他完全无法理解的方式影响着数十亿人的阅读。字距、行高、栏宽——这些参数在铅字时代是物理约束，在数字时代却成了设计选择。" },
-  { slug: "", title: '原研哉的"白"：空空荡荡，包罗万象', category: "阅读笔记", summary: "白不是一种颜色，而是一种容纳性。一张白纸不是空的，它包含着一切尚未落笔的想法。MUJI的设计之所以让人安静，不是因为极简，而是那些空白给了物品呼吸的空间。" },
-  { slug: "", title: "雨夜翻检旧信", category: "随感", summary: "昨夜下雨，翻出一只旧铁盒，里面是高中时代和几个笔友的通信。纸已经泛黄，有的地方被水渍洇开了墨迹。那时候没有微信和邮件，写一封信要等一周才收到回信。" },
-];
+async function getFriends() {
+  try {
+    const raw = await fs.readFile(
+      path.join(process.cwd(), "public", "friends", "index.json"),
+      "utf-8"
+    );
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
 
 export default async function HomePage() {
   const posts = await getPosts();
   const headline = posts[0] || null;
-  const rest = posts.slice(1);
-
-  // Stories: use real posts, then pad with placeholders
-  const storyPosts = rest.slice(0, 3);
-  const stories: { slug: string; title: string; category: string; summary: string; cover?: string }[] = storyPlaceholders.map((ph, i) => {
-    const real = storyPosts[i];
-    return real ? { slug: real.slug, title: real.title, category: real.category || "随笔", summary: real.summary || "", cover: real.cover } : ph;
-  });
+  const features = posts.slice(1, 3);
+  const tagsMap = getAllTags(posts);
+  const topTags = Array.from(tagsMap.entries()).slice(0, 8);
+  const friends = await getFriends();
 
   return (
-    <div className="newspaper-grid">
-      {/* ===== MAIN COLUMN ===== */}
-      <div className="min-w-0 space-y-8">
+    <div className="w-full space-y-8">
+      {/* ===== 方案 A：主体双栏报刊网格 ===== */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* ----- 左主栏 (70% 宽，深度阅读与头条) ----- */}
+        <div className="lg:col-span-8 lg:pr-6 lg:border-r border-rule space-y-8">
+          {/* 头版头条 (Lead Story) */}
+          {headline ? (
+            <article className="space-y-4">
+              {/* 电头与栏目 */}
+              <div className="flex items-center gap-3 text-xs font-mono tracking-wider text-ink-muted border-b border-rule pb-2">
+                <span className="bg-vermilion text-paper-pure px-2 py-0.5 font-semibold text-[0.7rem] uppercase">
+                  头版特稿 · LEAD DISPATCH
+                </span>
+                <span>{headline.date}</span>
+                {headline.category && (
+                  <>
+                    <span>/</span>
+                    <Link
+                      href={`/tags/${encodeURIComponent(headline.category)}`}
+                      className="text-vermilion hover:underline font-serif"
+                    >
+                      {headline.category}
+                    </Link>
+                  </>
+                )}
+              </div>
 
-        {/* ——— 1. HEADLINE ——— */}
-        {headline && (
-          <ScrollReveal>
-            <article>
-              <p className="text-[.62rem] text-text-secondary font-mono tracking-wider mb-3">
-                <span className="text-accent font-semibold">[头条]</span>
-                <span className="mx-2 text-border">|</span>
-                {headline.date}
-                {headline.content ? <><span className="mx-2 text-border">|</span>{wordCount(headline.content)} 字</> : null}
-              </p>
-              {headline.cover && (
-                <Link href={`/blog/${headline.slug}`} className="block mb-5">
-                  <img src={headline.cover} alt={headline.title}
-                    className="w-full max-h-72 object-cover border border-border hover:opacity-90 transition-opacity" />
-                </Link>
-              )}
-              <h2 className="font-display text-[1.65rem] md:text-[2rem] font-black leading-[1.1] mb-4 tracking-wide text-text">
-                <Link href={`/blog/${headline.slug}`} className="hover:text-accent transition-colors">
+              {/* 大标题 */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-snug">
+                <Link
+                  href={`/blog/${headline.slug}`}
+                  className="editorial-link hover:text-vermilion transition-colors"
+                >
                   {headline.title}
                 </Link>
               </h2>
+
+              {/* 头条导语框 */}
               {headline.summary && (
-                <div className="columns-1 md:columns-2 gap-8 text-sm md:text-[.88rem] leading-[1.9] text-text-secondary">
-                  <p className="mb-3">{headline.summary}</p>
-                  <p className="mb-3">点击标题阅读全文...</p>
+                <div className="bg-card border-l-4 border-vermilion p-3 sm:p-4 text-ink-secondary text-sm sm:text-base font-serif italic leading-relaxed">
+                  “{headline.summary}”
                 </div>
               )}
-              <div className="mt-5 border-t border-border" />
-            </article>
-          </ScrollReveal>
-        )}
 
-        {!headline && (
-          <ScrollReveal>
-            <article>
-              <p className="text-[.62rem] text-text-secondary font-mono tracking-wider mb-3">
-                <span className="text-accent font-semibold">[头条]</span>
-              </p>
-              <h2 className="font-display text-[1.65rem] md:text-[2rem] font-black leading-[1.1] mb-4 tracking-wide text-text">
-                欢迎来到 {siteConfig.title}
-              </h2>
-              <div className="columns-1 md:columns-2 gap-8 text-sm md:text-[.88rem] leading-[1.9] text-text-secondary">
-                <p className="mb-3">这是您的第一篇占位文章。在 public/blogs/ 中添加 Markdown 文章后，这里会自动显示最新文章。报纸风格博客采用了复古黄纸色调、多栏网格排版。</p>
-                <p className="mb-3">您可以撰写技术笔记、文艺随笔、阅读心得等各类内容——每一篇都会以报纸头条的形式呈现。</p>
+              {/* 头条封面图 (若有) */}
+              {headline.cover && (
+                <div className="w-full overflow-hidden border border-rule my-3 relative">
+                  <img
+                    src={headline.cover}
+                    alt={headline.title}
+                    className="w-full h-48 sm:h-64 object-cover filter contrast-[1.05] grayscale-[0.25] hover:grayscale-0 transition-all duration-300"
+                  />
+                  <div className="text-[0.65rem] font-mono text-ink-muted text-right py-1 px-2 bg-paper border-t border-rule">
+                    ▲ 本报插图配图
+                  </div>
+                </div>
+              )}
+
+              {/* 正文摘要与阅读引导 */}
+              <div className="text-ink-secondary font-serif text-sm sm:text-base leading-relaxed text-justify space-y-2">
+                <p>
+                  {headline.summary ||
+                    "这是一篇发布于本站的深度技术与思考札记。点击下方链接即可阅读全文，探讨代码架构、系统设计与数字时代的生活方式。"}
+                </p>
               </div>
-              <div className="mt-5 border-t border-border" />
-            </article>
-          </ScrollReveal>
-        )}
 
-        {/* ——— 2. THREE STORIES (asymmetric: wider first) ——— */}
-        <div>
-          <div className="story-grid-3">
-            {stories.map((p, i) => (
-              <ScrollReveal key={`story-${i}`} delay={i * 120}>
-                <article className="newspaper-card">
-                  {p.cover && (
-                    <img src={p.cover} alt={p.title} className="w-full h-28 object-cover border border-border mb-3" />
-                  )}
-                  <p className="text-[.6rem] text-text-secondary font-mono tracking-wider mb-2">
-                    <span className="font-semibold text-[#5A4A3A]">{p.category}</span>
-                  </p>
-                  <h3>
-                    {p.slug ? (
-                      <Link href={`/blog/${p.slug}`} className="text-text hover:text-accent transition-colors">{p.title}</Link>
-                    ) : (
-                      <span className="text-text">{p.title}</span>
+              {/* 头条底栏 */}
+              <div className="flex items-center justify-between text-xs font-mono text-ink-muted pt-3 border-t border-rule">
+                <div className="flex items-center gap-3">
+                  <span>约 {readingTime(headline.summary || "") * 3} 分钟阅读</span>
+                  <span>·</span>
+                  <span>主编特撰</span>
+                </div>
+                <Link
+                  href={`/blog/${headline.slug}`}
+                  className="inline-flex items-center gap-1 font-semibold text-vermilion hover:underline text-xs tracking-wider"
+                >
+                  阅读专稿全文 &rarr;
+                </Link>
+              </div>
+            </article>
+          ) : (
+            <div className="p-8 text-center border border-rule bg-card">
+              <p className="font-serif text-ink-muted">暂无头版专稿发布</p>
+            </div>
+          )}
+
+          {/* 双列特写 (Two-column Features) */}
+          {features.length > 0 && (
+            <div className="pt-6 border-t-2 border-rule-strong space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-base font-bold tracking-widest text-ink uppercase font-mono flex items-center gap-2">
+                  <span className="text-vermilion">◈</span>
+                  <span>二版要闻 · FEATURES</span>
+                </h3>
+                <Link
+                  href="/blog"
+                  className="text-xs font-mono text-ink-muted hover:text-vermilion transition-colors"
+                >
+                  查看全部文章 ({posts.length}) &rarr;
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {features.map((post, idx) => (
+                  <article
+                    key={post.slug}
+                    className={`space-y-2.5 ${
+                      idx === 0 ? "sm:pr-4 sm:border-r border-rule" : ""
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 text-[0.7rem] font-mono text-ink-muted">
+                      <span>{post.date}</span>
+                      {post.category && (
+                        <>
+                          <span>/</span>
+                          <span className="text-ink-secondary font-serif">
+                            {post.category}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    <h4 className="text-lg font-bold leading-snug">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="editorial-link hover:text-vermilion"
+                      >
+                        {post.title}
+                      </Link>
+                    </h4>
+                    {post.summary && (
+                      <p className="text-xs text-ink-secondary font-serif line-clamp-3 leading-relaxed">
+                        {post.summary}
+                      </p>
                     )}
-                  </h3>
-                  <p className="text-xs md:text-[.8rem] text-text-secondary leading-relaxed">
-                    {p.summary}
-                  </p>
-                </article>
-              </ScrollReveal>
+                    <div className="pt-1">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="text-xs font-mono text-vermilion hover:underline inline-flex items-center gap-1"
+                      >
+                        阅读全文 &rarr;
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* ----- 右副栏 (30% 宽，主笔档案 + 罗小黑特派报童 + 铅字标签) ----- */}
+        <aside className="lg:col-span-4 space-y-6">
+          {/* 主笔立像 (Author Profile / Byline) */}
+          <div className="classified-box p-5 text-center relative">
+            <span className="corner-ornament corner-tl">◈</span>
+            <span className="corner-ornament corner-tr">◈</span>
+            <span className="corner-ornament corner-bl">◈</span>
+            <span className="corner-ornament corner-br">◈</span>
+
+            <div className="flex flex-col items-center gap-3">
+              <Link href="/about" className="block group">
+                <AvatarDisplay
+                  author={siteConfig.author}
+                  fallback={siteConfig.avatar}
+                  className="w-20 h-20 transition-transform duration-200 group-hover:scale-105"
+                />
+              </Link>
+              <div>
+                <h3 className="text-base font-bold tracking-wider font-display">
+                  {siteConfig.author}
+                </h3>
+                <p className="text-xs font-serif text-ink-secondary mt-0.5">
+                  主编 · 计算机专业大学生
+                </p>
+              </div>
+
+              <p className="text-xs font-serif text-ink-muted leading-relaxed max-w-xs border-t border-b border-rule py-2 px-1">
+                “代码是沉着的诗行，屏幕是数字时代的油墨与纸张。”
+              </p>
+
+              {/* 社交极客入口 */}
+              <div className="flex items-center gap-4 text-xs font-mono text-ink-secondary pt-1">
+                <a
+                  href={siteConfig.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-vermilion transition-colors inline-flex items-center gap-1"
+                  title="GitHub 仓库"
+                >
+                  <span>GITHUB</span>
+                </a>
+                <span>·</span>
+                <a
+                  href={siteConfig.leetcode}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-vermilion transition-colors inline-flex items-center gap-1"
+                  title="LeetCode 题解"
+                >
+                  <span>LEETCODE</span>
+                </a>
+                <span>·</span>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="hover:text-vermilion transition-colors inline-flex items-center gap-1"
+                  title="发送邮件"
+                >
+                  <span>MAIL</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* 罗小黑特派报童 (Newsboy) */}
+          <DynamicNewsboy />
+
+          {/* 活字字盘 / 热门标签 (Tags Tray) */}
+          <div className="classified-box p-4 relative">
+            <span className="corner-ornament corner-tl">◈</span>
+            <span className="corner-ornament corner-tr">◈</span>
+            <span className="corner-ornament corner-bl">◈</span>
+            <span className="corner-ornament corner-br">◈</span>
+
+            <div className="flex items-center justify-between pb-2 mb-3 border-b border-rule">
+              <span className="text-xs font-mono font-bold tracking-widest text-ink uppercase">
+                ◈ 活字字盘 · TAGS ◈
+              </span>
+              <Link
+                href="/tags"
+                className="text-[0.68rem] font-mono text-ink-muted hover:text-vermilion"
+              >
+                全部字盘 &rarr;
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-1.5">
+              {topTags.map(([tag, count]) => (
+                <Link
+                  key={tag}
+                  href={`/tags/${encodeURIComponent(tag)}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-serif px-2 py-1 bg-paper border border-rule hover:border-rule-strong hover:bg-card transition-all"
+                >
+                  <span>{tag}</span>
+                  <span className="text-[0.65rem] font-mono text-ink-muted">
+                    {count}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      {/* ===== 底部通栏：分类广告与豆腐块 (Classifieds Grid) ===== */}
+      <section className="pt-8 border-t-2 border-rule-strong space-y-4 select-none">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-mono font-bold tracking-widest text-ink uppercase flex items-center gap-2">
+            <span className="text-vermilion">◈</span>
+            <span>副刊与同业专栏 · CLASSIFIEDS</span>
+          </span>
+          <span className="text-[0.7rem] font-mono text-ink-muted">
+            SECTION B · PAGE 2
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* 块 1：报友通讯录 */}
+          <div className="classified-box p-4 space-y-2">
+            <div className="flex items-center justify-between border-b border-rule pb-1 text-xs font-serif font-bold text-ink">
+              <span>【同好录 · 友链】</span>
+              <Link href="/friends" className="text-[0.68rem] font-mono text-vermilion hover:underline">
+                申请入报 &rarr;
+              </Link>
+            </div>
+            {friends.slice(0, 2).map((friend: any) => (
+              <div key={friend.name} className="text-xs space-y-0.5">
+                <a
+                  href={friend.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-ink hover:text-vermilion transition-colors inline-block"
+                >
+                  {friend.name}
+                </a>
+                <p className="text-ink-secondary text-[0.72rem] line-clamp-1">
+                  {friend.desc}
+                </p>
+              </div>
             ))}
           </div>
-          <div className="mt-5 border-t border-border" />
-        </div>
 
-        {/* ——— 3. Live2D 报童 ——— */}
-        <div>
-          <div className="flex justify-center py-2">
-            <Live2DCharacter />
-          </div>
-          <div className="mt-5 border-t border-border" />
-        </div>
-
-        {/* ——— 4. COLUMN (only if enough real posts) ——— */}
-        {rest.length >= 4 && (() => {
-          const col = rest[3];
-          return (
-            <ScrollReveal key={col.slug}>
-              <article className="newspaper-card">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-[3px] h-5 bg-accent" />
-                  <span className="text-[.65rem] text-text-secondary font-mono tracking-widest uppercase">
-                    <span className="text-accent font-semibold">专栏</span>
-                  </span>
-                </div>
-                <h3 className="font-display text-base md:text-lg font-bold leading-snug mb-3 text-text">
-                  <Link href={`/blog/${col.slug}`} className="hover:text-accent transition-colors">
-                    {col.title}
-                  </Link>
-                </h3>
-                <p className="text-sm md:text-[.85rem] text-text-secondary leading-relaxed">
-                  {col.summary}
-                </p>
-                <Link
-                  href={`/blog/${col.slug}`}
-                  className="inline-block text-xs text-text-secondary font-mono tracking-wider mt-3 hover:text-accent transition-colors"
-                >
-                  阅读全文 →
-                </Link>
-              </article>
-            </ScrollReveal>
-          );
-        })()}
-
-      </div>
-
-      {/* ===== 右侧副刊栏 ===== */}
-      <div className="hidden md:block space-y-6 pt-4 border-l border-border-light pl-6">
-        {/* 羽毛笔 */}
-        <div className="text-center">
-          <svg viewBox="0 0 100 160" className="w-20 h-28 mx-auto" fill="none" stroke="var(--accent)" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M 50 8 Q 45 70 48 145" />
-            <path d="M 49 25 Q 20 28 8 32" />
-            <path d="M 48 42 Q 15 48 6 56" />
-            <path d="M 48 60 Q 18 68 10 76" />
-            <path d="M 48 78 Q 25 86 18 94" />
-            <path d="M 48 98 Q 32 104 28 110" />
-            <path d="M 51 25 Q 80 28 92 32" />
-            <path d="M 52 42 Q 85 48 94 56" />
-            <path d="M 52 60 Q 82 68 90 76" />
-            <path d="M 52 78 Q 75 86 82 94" />
-            <path d="M 52 98 Q 68 104 72 110" />
-            <path d="M 47 138 L 49 152 L 50 155 L 51 152 L 53 138" />
-            <circle cx="50" cy="158" r="1.5" />
-          </svg>
-        </div>
-
-        <div className="ornament-rule"><span className="ornament">— ✦ 副 刊 ✦ —</span></div>
-
-        {/* 短讯卡片 */}
-        {stories.slice(0, 3).map((p, i) => (
-          <div key={i} className="supplement-card">
-            <div className="sup-title">
-              {p.slug ? (
-                <Link href={`/blog/${p.slug}`}>{p.title}</Link>
-              ) : (
-                <span>{p.title}</span>
-              )}
+          {/* 块 2：出版印行数据 */}
+          <div className="classified-box p-4 space-y-2">
+            <div className="border-b border-rule pb-1 text-xs font-serif font-bold text-ink">
+              <span>【印行总目 · DISPATCH STATS】</span>
             </div>
-            <div className="sup-meta">{p.category}</div>
+            <div className="grid grid-cols-3 gap-2 text-center pt-1 font-mono text-xs">
+              <div className="border border-rule p-1 bg-paper">
+                <div className="text-base font-bold text-vermilion">
+                  {posts.length}
+                </div>
+                <div className="text-[0.65rem] text-ink-muted">篇专稿</div>
+              </div>
+              <div className="border border-rule p-1 bg-paper">
+                <div className="text-base font-bold text-ink">
+                  {tagsMap.size}
+                </div>
+                <div className="text-[0.65rem] text-ink-muted">类字盘</div>
+              </div>
+              <div className="border border-rule p-1 bg-paper">
+                <div className="text-base font-bold text-ink">2026</div>
+                <div className="text-[0.65rem] text-ink-muted">创刊年</div>
+              </div>
+            </div>
           </div>
-        ))}
 
-        <div className="ornament-rule"><span className="ornament">— ✦ —</span></div>
-
-        {/* 名言 */}
-        <div className="border-l-2 border-accent/25 pl-3 py-1">
-          <p className="text-[.9rem] text-text leading-relaxed italic">
-            &ldquo;笔是思想的舌头。&rdquo;
-          </p>
-          <p className="text-[.65rem] text-text-secondary mt-1 font-mono tracking-wider">—— 塞万提斯</p>
+          {/* 块 3：极客箴言 */}
+          <div className="classified-box p-4 space-y-2">
+            <div className="border-b border-rule pb-1 text-xs font-serif font-bold text-ink">
+              <span>【发稿人手札 · AXIOM】</span>
+            </div>
+            <p className="text-xs font-serif text-ink-secondary italic leading-relaxed pt-1">
+              “计算机科学中只有两件难事：缓存失效和命名。愿我们的代码和文字，都能像铅字一样清晰有力。”
+            </p>
+            <div className="text-right text-[0.68rem] font-mono text-ink-muted">
+              —— 计算机系编辑室
+            </div>
+          </div>
         </div>
-
-        {/* 底部装饰 */}
-        <div className="text-center text-border text-[.55rem] tracking-[.4em] select-none">
-          ✦ ✦ ✦
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
